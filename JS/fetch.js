@@ -14,25 +14,28 @@ const fetchAllVIdeo = async () => {
 fetchAllVIdeo();
 // Time Update call from 63 line
 const getTime = (time) => {
-    const min = Math.floor(time / 60);
-    const hour = Math.floor(min / 60);
-    const days = Math.floor(hour/30)
-    const month = Math.floor(days / 30)
-    const year = Math.floor(month / 30);
-    const decade = Math.floor(year / 30);
     const sec = time % 60;
-    if(min>24 && hour<24) {
-        return `${hour} hour ${min%60} min ago`;
-    }
-    else if(hour>24){
-        return `${days} days ${hour%24} hour ago`;
-    }
+    const min = Math.floor(time / 60);
+    const hours = Math.floor(min / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(months / 12);
 
-     else {
-        return `${min} min ${sec} sec ago`;
+    if (time < 60) {
+        return `${time} seconds ago`;
+    } else if (min < 60) {
+        return `${min} minutes and ${sec} seconds ago`;
+    } else if (hours < 24) {
+        return `${hours} hours and ${min % 60} minutes ago`;
+    } else if (days < 30) {
+        return `${days} days ago`;
+    } else if (months < 12) {
+        return `${months} months ago`;
+    } else {
+        return `${years} years ago`;
     }
-
 };
+
 
 
 // DIsplay Button in web fatch from fetchCategories() line 2
