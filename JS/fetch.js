@@ -46,6 +46,16 @@ function displayFetchButton(data) {
         const btnDiv = document.createElement('div')
         btnDiv.innerHTML = `<button>${element.category}</button>`
         btnDiv.classList = 'btn '
+        btnDiv.onclick = async() => {
+            alert('Reza')
+
+        const musicRes= await fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${element.category_id}`) 
+        const musicdata=await musicRes.json();
+        displayALlVideo(musicdata.category
+        )  
+
+
+        }
         btnContainer.append(btnDiv)
     });
 }
@@ -53,15 +63,18 @@ function displayFetchButton(data) {
 // Display All video COntent in web fetch from fetchAllVIdeo() line 8;
 
 const displayALlVideo = (data) => {
+    const videosContaner = document.getElementById('videosContaner');
+    videosContaner.innerHTML = "";
     data.forEach(element => {
-        const videosContaner = document.getElementById('videosContaner');
+         
         const div = document.createElement('div');
+      
         div.innerHTML = `
     <figure class="h-[200px] object-cover relative">
     <img class="w-full h-full"
-      src="${element.thumbnail
-            }"
-      alt="Shoes" />
+      src="${element.thumbnail 
+            } "
+      alt="Shoes"/>
 
       ${element.others?.posted_date?.length == 0 ? "" : `<span class="absolute bottom-2 right-4 text-white px-1 rounded-full bg-slate-600">${getTime(element.others?.posted_date)}</span>`}
       
